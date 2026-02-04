@@ -1,18 +1,25 @@
-# Samson Opondo Portfolio
+# Samson Opondo Portfolio (React)
 
-A modern, responsive personal portfolio for freelance work and client outreach.
+A modern, responsive personal portfolio built with React and Vite for freelance work and client outreach.
 
 ## Structure
-- `index.html` — Main single-page layout with hero, projects, about, skills, and contact sections.
-- `styles.css` — Global styles, layout grid, and responsive rules.
+- `index.html` — Vite entry HTML file.
+- `src/main.jsx` — App bootstrap and global styles.
+- `src/App.jsx` — Page layout and section orchestration.
+- `src/components/` — React functional components for each section.
+- `src/styles/` — Component-level and global styling, including theme variables.
 
 ## Run locally
-1. Open the folder in your editor.
-2. Start a local static server, for example:
-   - `python -m http.server 8000`
-   - `npx serve .`
-3. Visit `http://localhost:8000` in your browser.
+1. Install dependencies:
+   - `npm install`
+2. Start the development server:
+   - `npm run dev`
+3. Open the local URL printed in your terminal.
+
+## Build
+- `npm run build`
+- `npm run preview`
 
 ## Deployment
-- **GitHub Pages:** Push to GitHub → Settings → Pages → Deploy from the `main` branch.
-- **Netlify:** Drag-and-drop the folder or connect the repo and deploy.
+- **GitHub Pages:** Build the project and deploy the `dist` folder.
+- **Netlify:** Connect the repo or drag-and-drop the `dist` folder after running `npm run build`.
