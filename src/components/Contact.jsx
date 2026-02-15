@@ -7,10 +7,38 @@ const initialState = {
   message: "",
 };
 
+const socialLinks = [
+  {
+    id: "email",
+    icon: "✉️",
+    label: "Email",
+    href: "mailto:samsonopondo1274@gmail.com",
+  },
+  {
+    id: "whatsapp",
+    icon: "💬",
+    label: "WhatsApp",
+    href: "https://wa.me/254116069774?text=Hi%20Samson%2C%20I%20would%20like%20to%20discuss%20a%20project%20with%20you",
+  },
+  {
+    id: "linkedin",
+    icon: "💼",
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/in/samson-opondo/",
+  },
+  {
+    id: "github",
+    icon: "⚙️",
+    label: "GitHub",
+    href: "https://github.com/Jesh-samso",
+  },
+];
+
 function Contact() {
   const [formValues, setFormValues] = useState(initialState);
   const [errors, setErrors] = useState({});
   const [status, setStatus] = useState("");
+  const [isSending, setIsSending] = useState(false);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -33,18 +61,61 @@ function Contact() {
     return nextErrors;
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const validationErrors = validate();
     setErrors(validationErrors);
 
-    if (Object.keys(validationErrors).length === 0) {
-      setStatus("Thanks! Your message is ready to send.");
-      setFormValues(initialState);
-    } else {
+    if (Object.keys(validationErrors).length !== 0) {
       setStatus("");
+      return;
+    }
+
+    setIsSending(true);
+    setStatus("Sending message...");
+
+    try {
+      const formData = new FormData();
+      formData.append("name", formValues.name);
+      formData.append("email", formValues.email);
+      formData.append("message", formValues.message);
+      formData.append("_subject", "New message from my Website");
+      formData.append("_captcha", "false");
+      formData.append("_template", "table");
+  
+
+      const res = await fetch(
+        "https://formsubmit.co/ajax/7eb8d432d749573222419f6c0906d0c1",
+
+        {
+          method: "POST",
+          body: formData,
+          headers: {
+            Accept: "application/json",
+          },
+        }
+      );
+
+      if (!res.ok) throw new Error("Network response was not ok");
+
+      const data = await res.json();
+      if (data.success || res.status === 200) {
+        setStatus("Message sent — thank you! I will reply soon.");
+        setFormValues(initialState);
+        setErrors({});
+      } else {
+        throw new Error("Submission failed");
+      }
+    } catch (err) {
+      setStatus(
+        "Failed to send message. If the problem persists, email me directly."
+      );
+    } finally {
+      setIsSending(false);
     }
   };
+
+  
 
   return (
     <section id="contact" className="section reveal">
@@ -52,60 +123,67 @@ function Contact() {
       <div className="container contact-grid">
         <div>
           <h2>Contact</h2>
+
+          <br/>
+          
           <p>
             Let’s work together. Share a few details about your project and I’ll
             reply within 24-48 hours.
           </p>
           <div className="contact-details">
             <span>Email</span>
-            <a href="mailto:samson.opondo@email.com">
-              samson.opondo@email.com
+            <a href="mailto:samsonopondo1274@gmail.com">
+              samsonopondo1274@gmail.com
             </a>
           </div>
+          <br/>
+           <p>
+          WhatsApp No. <br /> 0116069774
+          </p>
         </div>
-        <form className="contact-form" onSubmit={handleSubmit} noValidate>
-          <label htmlFor="name">Name</label>
-          <input
-            type="text"
-            id="name"
-            name="name"
-            placeholder="Your name"
-            value={formValues.name}
-            onChange={handleChange}
-            required
-          />
-          {errors.name && <span className="error">{errors.name}</span>}
+        <form
+  className="contact-form"
+  action="https://formsubmit.co/7eb8d432d749573222419f6c0906d0c1"
+  method="POST"
+>
+  <label htmlFor="name">Name</label>
+  <input
+    type="text"
+    id="name"
+    name="name"
+    placeholder="Your name"
+    required
+  />
 
-          <label htmlFor="email">Email</label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            placeholder="you@example.com"
-            value={formValues.email}
-            onChange={handleChange}
-            required
-          />
-          {errors.email && <span className="error">{errors.email}</span>}
+  <label htmlFor="email">Email</label>
+  <input
+    type="email"
+    id="email"
+    name="email"
+    placeholder="jesh123@gmail.com"
+    required
+  />
 
-          <label htmlFor="message">Message</label>
-          <textarea
-            id="message"
-            name="message"
-            rows="5"
-            placeholder="Tell me about your project..."
-            value={formValues.message}
-            onChange={handleChange}
-            required
-          ></textarea>
-          {errors.message && <span className="error">{errors.message}</span>}
+  <label htmlFor="message">Message</label>
+  <textarea
+    id="message"
+    name="message"
+    rows="5"
+    placeholder="Tell me about your project..."
+    required
+  ></textarea>
 
-          <button type="submit" className="btn btn-primary">
-            Send Message
-          </button>
-          {status && <p className="form-note">{status}</p>}
-          <p className="form-note">This form is front-end only for now.</p>
-        </form>
+  {/* Hidden FormSubmit fields */}
+  <input type="hidden" name="_subject" value="New message from my Website" />
+  <input type="hidden" name="_captcha" value="false" />
+  <input type="hidden" name="_template" value="table" />
+  <input type="hidden" name="_next" value="https://your-vercel-site.vercel.app/thank-you" />
+
+  <button type="submit" className="btn btn-primary">
+    Send Message
+  </button>
+</form>
+
       </div>
     </section>
   );

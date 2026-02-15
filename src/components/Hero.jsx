@@ -1,4 +1,6 @@
 import "../styles/Hero.css";
+import profilePic from "./photo web.jpg";
+
 
 function Hero() {
   return (
@@ -8,7 +10,7 @@ function Hero() {
         <div className="hero-content">
           <p className="eyebrow">Hello, I am</p>
           <h1>Samson Opondo</h1>
-          <p className="tagline">Web Developer &amp; Software Engineer</p>
+          <p className="tagline">Software Engineer  &amp; Web Developer </p>
           <p className="hero-description">
             I build modern websites and web apps that help businesses grow. My
             focus is on clean UI, performance, and delivering real value for
@@ -34,9 +36,10 @@ function Hero() {
           </div>
         </div>
         <div className="hero-card">
-          <div className="photo-placeholder" aria-label="Photo placeholder">
-            Photo
-          </div>
+         <div className="photo-placeholder">
+  <img src={profilePic} alt="Profile" />
+</div>
+
           <div className="card">
             <h2>Available for freelance</h2>
             <p>
@@ -48,7 +51,7 @@ function Hero() {
               <li>Responsive web apps &amp; dashboards</li>
               <li>Optimization and maintenance</li>
             </ul>
-            <a className="btn btn-primary" href="mailto:samson.opondo@email.com">
+            <a className="btn btn-primary" href="#contact">
               Email Me
             </a>
           </div>

@@ -1,12 +1,15 @@
 import "../styles/NavBar.css";
+import BrandPic from "./My_TechBrand.jpg";
 
 function NavBar({ links, theme, onToggleTheme }) {
   return (
     <header className="site-header">
       <div className="container nav">
+
         <a className="logo" href="#home">
-          Samson Opondo
+          <img src={BrandPic} alt="Profile" />
         </a>
+
         <nav aria-label="Primary">
           <ul className="nav-links">
             {links.map((link) => (
@@ -20,6 +23,7 @@ function NavBar({ links, theme, onToggleTheme }) {
           <a className="btn btn-secondary" href="#contact">
             Hire Me
           </a>
+          
           <button
             className="theme-toggle"
             type="button"

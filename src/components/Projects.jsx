@@ -2,18 +2,18 @@ import "../styles/Projects.css";
 
 const projects = [
   {
-    name: "Project Horizon",
+    name: "TechCon Website",
     description:
-      "A product roadmap dashboard concept for teams to align on goals and releases.",
-    link: "https://github.com/yourname/project-horizon",
-    tag: "React",
+      "A responsive event website with speakers,schedules and registration layout.",
+    link: "https://techcon-website.vercel.app/",
+    tag: "HTML & CSS",
   },
   {
-    name: "Local Market Hub",
+    name: "Student-Budget-Tracker",
     description:
-      "A modern landing page for local vendors to showcase products and accept inquiries.",
-    link: "https://github.com/yourname/local-market-hub",
-    tag: "JavaScript",
+      "An app design to help university students to track and review their financial spending for better financial discipline.",
+    link: "https://student-budget-tracker-opal.vercel.app/",
+    tag: "React",
   },
   {
     name: "Insight Portfolio",
@@ -42,7 +42,7 @@ function Projects() {
               </div>
               <p>{project.description}</p>
               <a className="btn btn-link" href={project.link}>
-                View GitHub Repo →
+                View The Project Here →
               </a>
             </article>
           ))}

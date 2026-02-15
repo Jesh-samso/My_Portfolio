@@ -2,9 +2,10 @@
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(18, 18, 18, 0.92);
+  background: black;
   border-bottom: 1px solid var(--border);
   backdrop-filter: blur(12px);
+  transition: all 0.3s ease;
 }
 
 body[data-theme="light"] .site-header {
@@ -21,8 +22,14 @@ body[data-theme="light"] .site-header {
 }
 
 .logo {
-  font-weight: 700;
-  font-size: 1.1rem;
+  width: 200px;
+  height: 100px;
+  transition: all 0.3s ease;
+  
+}
+
+.logo:hover {
+  transform: scale(1.05);
 }
 
 .nav-links {
@@ -31,10 +38,32 @@ body[data-theme="light"] .site-header {
   font-size: 0.95rem;
   color: var(--muted);
   flex-wrap: wrap;
+  align-items: center;
+}
+
+.nav-links a {
+  position: relative;
+  font-weight: 500;
+  transition: color 0.3s ease;
 }
 
 .nav-links a:hover {
-  color: var(--text);
+  color: var(--accent);
+}
+
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--accent);
+  transition: width 0.3s ease;
+}
+
+.nav-links a:hover::after {
+  width: 100%;
 }
 
 .nav-actions {
@@ -51,6 +80,13 @@ body[data-theme="light"] .site-header {
   background: transparent;
   color: var(--text);
   cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+}
+
+.theme-toggle:hover {
+  background: var(--accent-soft);
 }
 
 .toggle-track {
@@ -72,6 +108,7 @@ body[data-theme="light"] .site-header {
   background: var(--accent);
   transform: translateX(0);
   transition: transform 0.3s ease;
+  box-shadow: 0 2px 4px rgba(76, 201, 240, 0.3);
 }
 
 .theme-toggle[aria-pressed="true"] .toggle-thumb {
@@ -81,10 +118,22 @@ body[data-theme="light"] .site-header {
 .toggle-label {
   font-size: 0.85rem;
   color: var(--muted);
+  font-weight: 500;
 }
 
 @media (max-width: 768px) {
   .nav {
+    justify-content: center;
+    padding: 1rem 0;
+  }
+
+  .logo {
+    width: 100%;
+    text-align: center;
+  }
+
+  .nav-links {
+    width: 100%;
     justify-content: center;
   }
 

@@ -1,4 +1,5 @@
 import "../styles/About.css";
+import profilePic from "./photo web.jpg";
 
 function About() {
   return (
@@ -12,15 +13,17 @@ function About() {
             projects. I enjoy collaborating with clients to turn ideas into
             simple, powerful digital experiences.
           </p>
+          <br/>
           <p>
             My focus is on solving real-world problems through technology and
             delivering work that is reliable, scalable, and easy to maintain.
           </p>
         </div>
         <div className="about-card">
-          <div className="photo-placeholder" aria-label="Photo placeholder">
-            Photo
-          </div>
+          <div className="photo-placeholder">
+  <img src={profilePic} alt="Profile" />
+</div>
+
           <h3>What I bring</h3>
           <ul>
             <li>Clear communication and goal alignment</li>
